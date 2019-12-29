@@ -1,0 +1,12 @@
+﻿@using (Html.BeginForm("Search", "Home", FormMethod.Post, new { @class = this.ViewData["class"] }))
+{
+    @Html.AntiForgeryToken()
+    <div class="input-group">
+        <input type="text" name="search" class="form-control bg-light border-0 small" placeholder="Search for books..." aria-label="Search" aria-describedby="basic-addon2">
+        <div class="input-group-append">
+            <button class="btn btn-primary" type="submit">
+                <i class="fas fa-search fa-sm"></i>
+            </button>
+        </div>
+    </div>
+}

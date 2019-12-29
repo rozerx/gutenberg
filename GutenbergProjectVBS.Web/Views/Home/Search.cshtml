@@ -1,0 +1,30 @@
+﻿@using GutenbergProjectVBS.Web.Models.ApiModels
+@using GutenbergProjectVBS.Web.GVBSHelpers
+@model List<SearchResult>
+@{
+    ViewBag.Title = "Search";
+}
+
+<h2>Search Results <span class="font-weight-bold">"@ViewBag.searchData"</span></h2>
+<p>@Model.Count records found.</p>
+
+<div class="card-columns" style="column-count: 4 !important;">
+    @foreach (SearchResult book in Model)
+    {
+    <div class="card shadow mb-4">
+        @if (GVBSHelperClass.RemoteFileExistsUrl(string.Format("http://www.gutenberg.org/files/{0}/{0}-h/images/cover.jpg", book.Id)))
+        {
+            <a href="/Ebooks/View/@book.Id">
+                <img src="@string.Format("http://www.gutenberg.org/files/{0}/{0}-h/images/cover.jpg", book.Id)" class="card-img-top" alt="@book.Title">
+            </a>
+        }
+        <div class="card-body">
+            <a href="/Ebooks/View/@book.Id"><h6 class="card-title font-weight-bold">@book.Title</h6></a>
+            @if (book.Authors.Count > 0)
+            {
+                <h6 class="card-title">@book.Authors.First().Name</h6>
+            }
+        </div>
+    </div>
+    }
+</div>

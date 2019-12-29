@@ -1,0 +1,106 @@
+{
+  "format": 1,
+  "restore": {
+    "D:\\Bilgisayar Mühendisliği\\CSE\\4.Sınıf\\Software Engineering\\GutenbergProjectVBS\\GutenbergProjectVBS.Web.Test\\GutenbergProjectVBS.Web.Test.csproj": {}
+  },
+  "projects": {
+    "D:\\Bilgisayar Mühendisliği\\CSE\\4.Sınıf\\Software Engineering\\GutenbergProjectVBS\\GutenbergProjectVBS.Web.Test\\GutenbergProjectVBS.Web.Test.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\Bilgisayar Mühendisliği\\CSE\\4.Sınıf\\Software Engineering\\GutenbergProjectVBS\\GutenbergProjectVBS.Web.Test\\GutenbergProjectVBS.Web.Test.csproj",
+        "projectName": "GutenbergProjectVBS.Web.Test",
+        "projectPath": "D:\\Bilgisayar Mühendisliği\\CSE\\4.Sınıf\\Software Engineering\\GutenbergProjectVBS\\GutenbergProjectVBS.Web.Test\\GutenbergProjectVBS.Web.Test.csproj",
+        "packagesPath": "C:\\Users\\Software Developer\\.nuget\\packages\\",
+        "outputPath": "D:\\Bilgisayar Mühendisliği\\CSE\\4.Sınıf\\Software Engineering\\GutenbergProjectVBS\\GutenbergProjectVBS.Web.Test\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Microsoft\\Xamarin\\NuGet\\",
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\Software Developer\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp3.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp3.1": {
+            "projectReferences": {
+              "D:\\Bilgisayar Mühendisliği\\CSE\\4.Sınıf\\Software Engineering\\GutenbergProjectVBS\\GutenbergProjectVBS.Web\\GutenbergProjectVBS.Web.csproj": {
+                "projectPath": "D:\\Bilgisayar Mühendisliği\\CSE\\4.Sınıf\\Software Engineering\\GutenbergProjectVBS\\GutenbergProjectVBS.Web\\GutenbergProjectVBS.Web.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp3.1": {
+          "dependencies": {
+            "EntityFramework": {
+              "target": "Package",
+              "version": "[6.3.0, )"
+            },
+            "MSTest.TestAdapter": {
+              "target": "Package",
+              "version": "[2.0.0, )"
+            },
+            "MSTest.TestFramework": {
+              "target": "Package",
+              "version": "[2.0.0, )"
+            },
+            "Microsoft.NET.Test.Sdk": {
+              "target": "Package",
+              "version": "[16.2.0, )"
+            },
+            "NUnit": {
+              "target": "Package",
+              "version": "[3.12.0, )"
+            },
+            "coverlet.collector": {
+              "target": "Package",
+              "version": "[1.0.1, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.100\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "D:\\Bilgisayar Mühendisliği\\CSE\\4.Sınıf\\Software Engineering\\GutenbergProjectVBS\\GutenbergProjectVBS.Web\\GutenbergProjectVBS.Web.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\Bilgisayar Mühendisliği\\CSE\\4.Sınıf\\Software Engineering\\GutenbergProjectVBS\\GutenbergProjectVBS.Web\\GutenbergProjectVBS.Web.csproj",
+        "projectName": "GutenbergProjectVBS.Web",
+        "projectPath": "D:\\Bilgisayar Mühendisliği\\CSE\\4.Sınıf\\Software Engineering\\GutenbergProjectVBS\\GutenbergProjectVBS.Web\\GutenbergProjectVBS.Web.csproj"
+      },
+      "frameworks": {
+        "net472": {}
+      }
+    }
+  }
+}

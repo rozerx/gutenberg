@@ -1,0 +1,74 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <AssemblyTitle>BCrypt.Net-Next</AssemblyTitle>
+    <AssemblyName>BCrypt.Net-Next</AssemblyName>
+
+    <TargetFrameworks>netstandard2.0;netstandard2.1;net20;net35;net40;net452;net462;net472</TargetFrameworks>
+    <OutputTypeEx>Library</OutputTypeEx>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <IncludeSource>true</IncludeSource>
+
+    <PackageId>BCrypt.Net-Next</PackageId>
+    <Title>BCrypt .Net</Title>
+    <Authors>Chris McKee, Ryan D. Emerl, Damien Miller</Authors>
+    <Copyright>2006-2019 Chris McKee, Ryan D. Emerl, Damien Miller</Copyright>
+    <Summary>BCrypt.Net, C# implementation of BCrypt, OpenBSD-style Blowfish password hashing</Summary>
+    <Description>A fixed, enhanced and namespace compatible version of BCrypt.Net port of jBCrypt implemented in C#. It uses a variant of the Blowfish encryption algorithm’s keying schedule, and introduces a work factor, which allows you to determine how expensive the hash function will be, allowing the algorithm to be "future-proof".</Description>
+    <License>https://github.com/BcryptNet/bcrypt.net/blob/master/licence.txt</License>
+    <PackageLicenseUrl>https://github.com/BcryptNet/bcrypt.net/blob/master/licence.txt</PackageLicenseUrl>
+
+    <SignAssembly>true</SignAssembly>
+    <PublicSign Condition=" '$(OS)' != 'Windows_NT' ">true</PublicSign>
+    <AssemblyOriginatorKeyFile>../bcrypt.pfx</AssemblyOriginatorKeyFile>
+
+    <Version>3.2.1</Version>
+    <PackageTags>bcrypt;BCrypt.Net;cryptography;hashing;password;security,hash;crypto;blowfish;gdpr</PackageTags>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <Deterministic>false</Deterministic>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="..\BCrypt.Net\**\*.cs" Exclude="..\BCrypt.Net\obj\**\*.cs" />
+  </ItemGroup>
+
+  <PropertyGroup Condition="'$(TargetFramework)' == 'net20' ">
+    <DefineConstants>$(DefineConstants);LEGACY</DefineConstants>
+    <FrameworkPathOverride Condition="'$(TargetFramework)' == 'net20'">C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v3.5\Profile\Client</FrameworkPathOverride>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(TargetFramework)' == 'net35' ">
+    <DefineConstants>$(DefineConstants);LEGACY</DefineConstants>
+    <FrameworkPathOverride Condition="'$(TargetFramework)' == 'net35'">C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v3.5\Profile\Client</FrameworkPathOverride>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(TargetFramework)' == 'net40' ">
+    <DefineConstants>$(DefineConstants);LEGACY</DefineConstants>
+  </PropertyGroup>
+
+  <ItemGroup Condition="'$(TargetFramework)' == 'net20|net35|net40'">
+    <Reference Include="System" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(TargetFramework)' == 'net452|net462|net472'">
+    <PackageReference Include="System.Text.RegularExpressions" Version="4.3.1" />
+    <Reference Include="System" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="..\BCrypt.Net\Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Update="SourceLink.Create.GitHub" Version="2.8.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Properties\" />
+  </ItemGroup>
+
+  <PropertyGroup Condition="'$(Configuration)'=='Release'">
+    <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\BCrypt.Net-Next.xml</DocumentationFile>
+  </PropertyGroup>
+
+</Project>

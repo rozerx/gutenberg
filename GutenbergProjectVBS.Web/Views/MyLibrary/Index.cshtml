@@ -1,0 +1,158 @@
+﻿@using GutenbergProjectVBS.Web.Models.ViewModels
+@using System.Text;
+@model LibraryViewModel
+@{
+    ViewBag.Title = "My Bookshelf";
+}
+
+@if (TempData["BookSoftDeleteSuccess"] != null)
+{
+    <div class="px-3 py-3 bg-gradient-success text-white">
+        @TempData["BookSoftDeleteSuccess"]
+    </div>
+}
+
+@if (TempData["BookSoftDeleteError"] != null)
+{
+    <div class="px-3 py-3 bg-gradient-danger text-white">
+        @TempData["BookSoftDeleteError"]
+    </div>
+}
+
+@if (TempData["BookRecoverySuccess"] != null)
+{
+    <div class="px-3 py-3 bg-gradient-success text-white">
+        @TempData["BookRecoverySuccess"]
+    </div>
+}
+
+@if (TempData["BookRecoveryError"] != null)
+{
+    <div class="px-3 py-3 bg-gradient-danger text-white">
+        @TempData["BookRecoveryError"]
+    </div>
+}
+
+@if (TempData["BookDeleteSuccess"] != null)
+{
+    <div class="px-3 py-3 bg-gradient-success text-white">
+        @TempData["BookDeleteSuccess"]
+    </div>
+}
+
+@if (TempData["BookDeleteError"] != null)
+{
+    <div class="px-3 py-3 bg-gradient-danger text-white">
+        @TempData["BookDeleteError"]
+    </div>
+}
+
+<div class="container-fluid">
+    <div class="title-row">
+        <p class="title-major">My Bookshelf</p>
+    </div>
+    <div class="book-showcase">
+        @if (Model.MySelectedBooks.Count > 0)
+        {
+            <div class="row">
+                @foreach (var library in Model.MySelectedBooks)
+                {
+                    <div class="col-xs-3 col-sm-3 mb-4">
+                        <div class="bg-dark d-inline">
+                            <div class="position-absolute z-index-2 w-95 bg-transparent-dark text-white bottom-20">
+                                <p class="book-title mt-0 mb-0 p-2">@library.Book.BookTitle</p>
+                                <p class="author-name mt-0 mb-0 p-2">
+                                    @{
+                                        StringBuilder authors = new StringBuilder();
+                                        foreach (var author in library.Book.Authors)
+                                        {
+                                            authors.Append(author.AuthorName + ",");
+                                        }
+                                        string deleteTarget = "deleteBookModal_" + library.LibraryId;
+                                    }
+                                    @authors.ToString()
+                                </p>
+                                <p class="text-center mt-1">
+                                    <a href="/MyLibrary/ReadBook/@library.LibraryId" class="btn btn-primary btn-sm">
+                                        <i class="fas fa-book"></i> Read Book
+                                    </a>
+                                    <a href="/MyLibrary/SoftDelete/@library.LibraryId" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?');">
+                                        <i class="fas fa-trash"></i> Delete Book
+                                    </a>
+                                </p>
+                            </div>
+                            @if (library.Book.FileName != null)
+                            {
+                                <img class="book-cover" src="@library.Book.FileName" alt="@library.Book.BookTitle">
+                            }
+                            else
+                            {
+                                <img class="book-cover" src="~/Assets/Img/noImage.png" alt="@library.Book.BookTitle">
+                            }
+                        </div>
+                    </div>
+                }
+            </div>
+            <div class="book-bottom2"></div>
+        }
+        else
+        {
+            <div class="px-3 py-3 bg-gradient-info text-white">
+                Your library is empty.
+            </div>
+        }
+    </div>
+</div>
+
+@if (Model.MyDeletedSelectedBooks.Count > 0)
+{
+    <div class="container-fluid">
+        <div class="title-row">
+            <p class="title-major">Deleted My Bookshelf</p>
+        </div>
+        <div class="book-showcase">
+
+            <div class="row">
+                @foreach (var library in Model.MyDeletedSelectedBooks)
+                {
+                    <div class="col-xs-3 col-sm-3 mb-4">
+                        <div class="bg-dark d-inline">
+                            <div class="position-absolute z-index-2 w-95 bg-transparent-dark text-white bottom-20">
+                                <p class="book-title mt-0 mb-0 p-2">@library.Book.BookTitle</p>
+                                <p class="author-name mt-0 mb-0 p-2">
+                                    @{
+                                        StringBuilder authors = new StringBuilder();
+                                        foreach (var author in library.Book.Authors)
+                                        {
+                                            authors.Append(author.AuthorName + ",");
+                                        }
+                                        string deleteTarget = "deleteBookModal_" + library.LibraryId;
+                                    }
+                                    @authors.ToString()
+                                </p>
+                                <p class="text-center mt-1">
+                                    <a href="/MyLibrary/Recovery/@library.LibraryId" class="btn btn-primary btn-sm">
+                                        <i class="fas fa-exchange-alt"></i> Recovery Book
+                                    </a>
+                                    <a href="/MyLibrary/Delete/@library.LibraryId" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?');">
+                                        <i class="fas fa-trash"></i> Trash Book
+                                    </a>
+                                </p>
+                            </div>
+                            @if (library.Book.FileName != null)
+                            {
+                                <img class="book-cover" src="@library.Book.FileName" alt="@library.Book.BookTitle">
+                            }
+                            else
+                            {
+                                <img class="book-cover" src="~/Assets/Img/noImage.png" alt="@library.Book.BookTitle">
+                            }
+                        </div>
+                    </div>
+                }
+            </div>
+            <div class="book-bottom2"></div>
+
+        </div>
+    </div>
+}

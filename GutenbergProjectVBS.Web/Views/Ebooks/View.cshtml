@@ -1,0 +1,89 @@
+﻿@model GutenbergProjectVBS.Web.Models.Book
+@{
+    ViewBag.Title = "Ebook Detail";
+}
+
+    <div class="row">
+        <div class="col-lg-4">
+            <!-- Basic Card Example -->
+            <div class="card shadow mb-4">
+                <img src="@Model.FileName" class="img-fluid" />
+            </div>
+        </div>
+        <div class="col-lg-8">
+            @if (TempData["EbookExistInLibrary"] != null)
+            {
+                <div class="px-3 py-3 bg-gradient-danger text-white">
+                    @TempData["EbookExistInLibrary"]
+                </div>
+            }
+            <!-- Basic Card Example -->
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <div class="row">
+                        <div class="col align-middle">
+                            <h4 class="m-0 font-weight-bold text-primary">Ebook Detail</h4>
+                        </div>
+                        <div class="col text-right">
+                            @using (Html.BeginForm("Create", "MyLibrary", FormMethod.Post, new { @class = "user" }))
+                            {
+                                @Html.AntiForgeryToken()
+                                @Html.ValidationSummary(true)
+                                @Html.Hidden("BookId", Model.BookId);
+                                @Html.Hidden("EbookNo", Model.EbookNo);
+                                <button type="submit" class="btn btn-sm btn-outline-danger shadow-sm">
+                                    <i class="fa fa-book"></i> Add My Bookshelf
+                                </button>
+                            }
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    @foreach (var author in Model.Authors)
+                    {
+                        <p>
+                            <strong>Author : </strong> <a href="/Author/@author.AuthorId">@(author.AuthorName + ", " + (author.BirthYear.ToString() ?? "") + ", " + (author.DeathYear.ToString() ?? ""))</a>
+                        </p>
+                        <hr />
+                    }
+                    <p>
+                        <strong>Title : </strong> @Model.BookTitle
+                    </p>
+                    <hr />
+                    @foreach (var lang in Model.Languages)
+                    {
+                        <p>
+                            <strong>Language : </strong> <a href="/Language/@lang.LanguageId">@lang.LanguageTitle</a>
+                        </p>
+                        <hr />
+                    }
+                    @foreach (var category in Model.Categories)
+                    {
+                        <p>
+                            <strong>Category : </strong> <a href="/Category/@category.CategoryId">@category.CategoryTitle</a>
+                        </p>
+                        <hr />
+                    }
+                    <p>
+                        <strong>Ebook-No : </strong> @Model.EbookNo
+                    </p>
+                    <hr />
+                    <p>
+                        <strong>Media Type : </strong> @Model.MediaType
+                    </p>
+                    <hr />
+                    <p>
+                        <strong>Copyright Status : </strong> @(Model.CopyrightStatus == true ? "Public domain in the USA." : "Copyrighted. Read the copyright notice inside this book for details.")
+                    </p>
+                    <hr />
+                    <p>
+                        <strong>Price : </strong> $ @Model.Price
+                    </p>
+                    <hr />
+                    <p>
+                        <strong>Download Count : </strong> @Model.DownloadCount
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>

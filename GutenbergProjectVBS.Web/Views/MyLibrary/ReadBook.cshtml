@@ -1,0 +1,9 @@
+﻿@using GutenbergProjectVBS.Web.Models.ViewModels
+@model ReadBookViewModel
+@{
+    ViewBag.Title = "Read Book - " + Model.LibraryDetail.Book.EbookNo;
+}
+
+<h2>@Model.LibraryDetail.Book.BookTitle</h2>
+
+@Model.LibraryDetail.BookId

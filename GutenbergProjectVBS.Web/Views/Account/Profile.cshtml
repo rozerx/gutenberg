@@ -1,0 +1,57 @@
+﻿@using GutenbergProjectVBS.Web.Models.ViewModels
+@model ProfileViewModel
+@{
+    ViewBag.Title = "Profile";
+}
+
+<!-- Outer Row -->
+<div class="row justify-content-center">
+
+    <div class="col-xl-6 col-lg-6 col-md-6">
+        <div class="card o-hidden border-0 shadow-lg my-5">
+            <div class="card-body p-0">
+                @if (TempData["UserProfileSuccess"] != null)
+                {
+                    <div class="px-3 py-3 bg-gradient-success text-white">
+                        @TempData["UserProfileSuccess"]
+                    </div>
+                }
+                @if (TempData["UserProfileFail"] != null)
+                {
+                    <div class="px-3 py-3 bg-gradient-danger text-white">
+                        @TempData["UserProfileFail"]
+                    </div>
+                }
+                <!-- Nested Row within Card Body -->
+                <div class="p-5">
+                    <div class="text-center">
+                        <h1 class="h4 text-gray-900 mb-4">User Profile</h1>
+                    </div>
+                    @using (Html.BeginForm("Profile", "Account", FormMethod.Post, new { @class = "user" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.ValidationSummary(true)
+
+                        <div class="form-group">
+                            @Html.EditorFor(x => x.Name, new { htmlAttributes = new { @class = "form-control form-control-user", placeholder = "Name*" } })
+                            @Html.ValidationMessageFor(x => x.Name)
+                        </div>
+
+                        <div class="form-group">
+                            @Html.EditorFor(x => x.Surname, new { htmlAttributes = new { @class = "form-control form-control-user", placeholder = "Surname*" } })
+                            @Html.ValidationMessageFor(x => x.Surname)
+                        </div>
+
+                        <div class="form-group">
+                            @Html.TextBoxFor(x => x.Email, new { @class = "form-control form-control-user", @readonly = "", placeholder = "Enter email address..." })
+                            @Html.ValidationMessageFor(x => x.Email)
+                        </div>
+
+                        <input type="submit" class="btn btn-primary btn-user btn-block" value="Save">
+                    }
+                    <hr>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

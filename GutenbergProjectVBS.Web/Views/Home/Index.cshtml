@@ -1,0 +1,26 @@
+﻿@using GutenbergProjectVBS.Web.Models
+@model List<Book>
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<h2>Latest Books</h2>
+
+<div class="card-columns" style="column-count: 4 !important;">
+    @foreach (Book book in Model)
+    {
+        <div class="card shadow mb-4">
+            @if (book.FileName != null)
+            {
+                <a href="/Ebooks/View/@book.EbookNo"><img src="@book.FileName" class="card-img-top" alt="@book.BookTitle"></a>
+            }
+        <div class="card-body">
+            <a href="/Ebooks/View/@book.EbookNo"><h6 class="card-title font-weight-bold">@book.BookTitle</h6></a>
+            @if (book.Authors.Count > 0)
+            {
+                <h6 class="card-title">@book.Authors.First().AuthorName</h6>
+            }
+        </div>
+        </div>
+    }
+</div>
