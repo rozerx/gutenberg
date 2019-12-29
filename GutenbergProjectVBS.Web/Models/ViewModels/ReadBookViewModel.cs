@@ -8,5 +8,6 @@ namespace GutenbergProjectVBS.Web.Models.ViewModels
     public class ReadBookViewModel
     {
         public Library LibraryDetail { get; set; }
+        public BookPage BookPages { get; set; }
     }
 }

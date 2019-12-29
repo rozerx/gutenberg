@@ -42,12 +42,6 @@ namespace GutenbergProjectVBS.Web.Models.Context
                 lb.ToTable("BookLanguage");
             });
 
-            modelBuilder.Entity<Book>().HasMany<BookPage>(b => b.BookPages).WithMany(l => l.Books).Map(bb => {
-                bb.MapLeftKey("BookRefId");
-                bb.MapRightKey("BookPageRefId");
-                bb.ToTable("BookAndBookPages");
-            });
-
             base.OnModelCreating(modelBuilder);
         }
     }

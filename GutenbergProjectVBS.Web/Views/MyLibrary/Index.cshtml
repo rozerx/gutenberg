@@ -73,7 +73,11 @@
                                     @authors.ToString()
                                 </p>
                                 <p class="text-center mt-1">
-                                    <a href="/MyLibrary/ReadBook/@library.LibraryId" class="btn btn-primary btn-sm">
+                                    <a href="@Url.Action("ReadBook","MyLibrary",new
+                                        {
+                                            id = library.LibraryId,
+                                            page = (library.PageNumber == 0 ? 1 : library.PageNumber)
+                                        })" class="btn btn-primary btn-sm">
                                         <i class="fas fa-book"></i> Read Book
                                     </a>
                                     <a href="/MyLibrary/SoftDelete/@library.LibraryId" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?');">
