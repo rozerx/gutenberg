@@ -197,10 +197,16 @@ namespace GutenbergProjectVBS.Web.Controllers
                         Languages = languages,
                         CreatedAt = DateTime.Now
                     };
-                    newBook.Attach(new EbookObserver(book.Id));
-                    newBook.Notify();
                     db.Books.Add(newBook);
                     db.SaveChanges();
+                    // Detail
+                    Book getBookDetail = db.Books.AsQueryable().FirstOrDefault(x => x.EbookNo == book.Id);
+                    if(getBookDetail != null)
+                    {
+                        getBookDetail.Attach(new EbookObserver(book.Id, getBookDetail.BookId));
+                        getBookDetail.Notify();
+                        //db.SaveChanges();
+                    }                    
                 }
             } catch(DbEntityValidationException ex)
             {

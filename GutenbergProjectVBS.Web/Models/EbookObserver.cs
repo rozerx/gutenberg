@@ -14,18 +14,20 @@ namespace GutenbergProjectVBS.Web.Models
     public class EbookObserver : Observer
     {
         private int EbookNo;
-        public EbookObserver(int EbookNo)
+        private int BookId;
+        public EbookObserver(int EbookNo, int BookId)
         {
             this.EbookNo = EbookNo;
+            this.BookId = BookId;
         }
 
         public override void Update()
         {
             Thread.Sleep(3000);
-            System.Diagnostics.Debug.WriteLine(string.Format("kitap ebook ekleme başlıyor.... ID : {0}", this.EbookNo));
+            System.Diagnostics.Debug.WriteLine(string.Format("kitap ebook ekleme başlıyor.... ID : {0}", EbookNo));
             try
             {
-                string path = string.Format("~/Files/{0}/epub_{0}.epub", this.EbookNo);
+                string path = string.Format("~/Files/{0}/epub_{0}.epub", EbookNo);
                 using (var fs = new FileStream(HostingEnvironment.MapPath(path), FileMode.Open))
                 {
                     EpubBook epubBook = EpubReader.ReadBook(fs);
@@ -35,16 +37,13 @@ namespace GutenbergProjectVBS.Web.Models
                         string htmlContent = textContentFile.Content;
                         HtmlAgilityPack.HtmlDocument htmlDocument = new HtmlAgilityPack.HtmlDocument();
                         htmlDocument.LoadHtml(htmlContent);
-                        StringBuilder stringBuilder = new StringBuilder();
-                        stringBuilder.Append(htmlDocument.DocumentNode.InnerText);
-
                         // Insert to db
                         using (VBSContext db = new VBSContext())
                         {
-                            Book getBook = db.Books.AsQueryable().Where(x => x.EbookNo == EbookNo).FirstOrDefault();
                             BookPage bp = new BookPage();
-                            bp.Books.Add(getBook);
-                            bp.Description = stringBuilder.ToString();
+                            bp.BookId = BookId;
+                            bp.HtmlContent = htmlContent;
+                            bp.Description = htmlDocument.DocumentNode.InnerText.Replace("\n", "<br/>");
                             db.BookPages.Add(bp);
                             db.SaveChanges();
                         }

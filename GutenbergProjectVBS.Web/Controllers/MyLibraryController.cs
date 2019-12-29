@@ -7,6 +7,7 @@ using System.Web.Mvc;
 using System.Data.Entity;
 using GutenbergProjectVBS.Web.Models.ViewModels;
 using System;
+using PagedList;
 
 namespace GutenbergProjectVBS.Web.Controllers
 {
@@ -82,18 +83,43 @@ namespace GutenbergProjectVBS.Web.Controllers
             }
         }
 
-        public ActionResult ReadBook(int? id)
+        public ActionResult ReadBook(int? id, int? page)
         {
             ReadBookViewModel readBookViewModel = new ReadBookViewModel();
+
             using (VBSContext db = new VBSContext())
             {
-                readBookViewModel.LibraryDetail = db.Libraries
-                            .Include(s => s.Book)
-                            .Include(a => a.Book.Authors)
-                            .Include(c => c.Book.Categories)
-                            .Include(l => l.Book.Languages)
-                            .AsQueryable()
-                            .FirstOrDefault(x => x.LibraryId == id);
+                // Library
+                Library library = db.Libraries
+                                    .Include(s => s.Book)
+                                    .Include(a => a.Book.Authors)
+                                    .Include(c => c.Book.Categories)
+                                    .Include(l => l.Book.Languages)
+                                    .AsQueryable()
+                                    .FirstOrDefault(x => x.LibraryId == id);
+
+                readBookViewModel.LibraryDetail = library;
+
+                library.PageNumber = Convert.ToInt32(page);
+                db.SaveChanges();
+
+                int bookPageCount = db.BookPages.AsQueryable().Where(x => x.BookId == library.BookId).Count();
+                int pageNumber = 0;
+
+                int firstIndex = db.BookPages.AsQueryable().Where(x => x.BookId == library.BookId).FirstOrDefault().BookPageId;
+
+                if (page > bookPageCount)
+                    pageNumber = (Convert.ToInt32(firstIndex) + Convert.ToInt32(bookPageCount)) - 1;
+                else
+                    pageNumber = (page == 1 ? firstIndex : (Convert.ToInt32(firstIndex) + Convert.ToInt32(page)));
+
+                BookPage bookPage = db.BookPages
+                                        .AsQueryable()
+                                        .Where(x => x.BookId == library.BookId)
+                                        .Where(y => y.BookPageId == pageNumber)
+                                        .FirstOrDefault();
+
+                readBookViewModel.BookPages = bookPage;
             }
             return View(readBookViewModel);
         }

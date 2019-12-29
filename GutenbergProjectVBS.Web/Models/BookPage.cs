@@ -9,18 +9,18 @@ namespace GutenbergProjectVBS.Web.Models
 {
     public class BookPage
     {
-        public BookPage()
-        {
-            this.Books = new HashSet<Book>();
-        }
-
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int BookPageId { get; set; }
+
+        public int BookId { get; set; }
 
         [DataType(DataType.MultilineText)]
         public string Description { get; set; }
 
+        [DataType(DataType.MultilineText)]
+        public string HtmlContent { get; set; }
+
         // Relations
-        public virtual ICollection<Book> Books { get; set; }
+        public virtual Book Books { get; set; }
     }
 }

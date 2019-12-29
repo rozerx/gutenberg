@@ -4,6 +4,17 @@
     ViewBag.Title = "Read Book - " + Model.LibraryDetail.Book.EbookNo;
 }
 
-<h2>@Model.LibraryDetail.Book.BookTitle</h2>
+<style>
+    table { width: 100% }
+</style>
 
-@Model.LibraryDetail.BookId
+<div class="container">
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">@Model.LibraryDetail.Book.BookTitle</h6>
+        </div>
+        <div class="card-body">
+            @Html.Raw(HttpUtility.HtmlDecode(@Model.BookPages.HtmlContent))
+        </div>
+    </div>
+</div>
