@@ -1,0 +1,28 @@
+﻿@using GutenbergProjectVBS.Web.GVBSHelpers
+@using GutenbergProjectVBS.Web.Models
+@model IQueryable<Book>
+@{
+    ViewBag.Title = "Books";
+}
+
+<div class="card-columns" style="column-count: 4 !important;">
+    @foreach (var book in Model)
+    {
+        <div class="card shadow mb-4">
+            @if (GVBSHelperClass.RemoteFileExistsUrl(string.Format("http://www.gutenberg.org/files/{0}/{0}-h/images/cover.jpg", book.BookId)))
+            {
+                <a href="/Ebooks/View/@book.BookId">
+                    <img src="@string.Format("http://www.gutenberg.org/files/{0}/{0}-h/images/cover.jpg", book.BookId)" class="card-img-top" alt="@book.BookTitle">
+                </a>
+            }
+            <div class="card-body">
+                <a href="/Ebooks/View/@book.BookId"><h6 class="card-title font-weight-bold">@book.BookTitle</h6></a>
+                @if (book.Authors.Count > 0)
+                {
+                    <h6 class="card-title">@book.Authors.First().AuthorName</h6>
+                }
+            </div>
+        </div>
+    }
+</div>
+

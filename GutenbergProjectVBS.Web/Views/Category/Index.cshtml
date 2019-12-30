@@ -1,0 +1,15 @@
+﻿@using GutenbergProjectVBS.Web.Models
+@model IQueryable<Category>
+@{
+    ViewBag.Title = "Subjects";
+}
+
+<div>
+    <ul class="category list">
+        @foreach (var category in Model)
+        {
+            <li><a href="/Category/Detail/@category.CategoryId">@category.CategoryTitle</a></li>
+        }
+    </ul>
+</div>
+
